@@ -1,8 +1,15 @@
-import React, {useRef, useState} from 'react';
+import React from 'react';
 import useMediaRecorder from "./useMediaRecorder";
 
 const App = () => {
-  const { mediaUrl, startRecord, resumeRecord, pauseRecord, stopRecord } = useMediaRecorder();
+  const {
+    mediaUrl,
+    startRecord,
+    resumeRecord,
+    pauseRecord,
+    stopRecord,
+    clearBlobUrl,
+  } = useMediaRecorder();
 
   return (
     <div>
@@ -14,6 +21,7 @@ const App = () => {
       <button onClick={pauseRecord}>暂停</button>
       <button onClick={resumeRecord}>恢复</button>
       <button onClick={stopRecord}>停止</button>
+      <button onClick={clearBlobUrl}>清除 URL</button>
     </div>
   );
 }

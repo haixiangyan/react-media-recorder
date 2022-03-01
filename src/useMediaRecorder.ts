@@ -43,6 +43,12 @@ const useMediaRecorder = () => {
     pauseRecord,
     resumeRecord,
     stopRecord,
+    clearBlobUrl: () => {
+      if (mediaUrl) {
+        URL.revokeObjectURL(mediaUrl);
+      }
+      setMediaUrl('');
+    }
   }
 }
 
