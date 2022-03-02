@@ -10,7 +10,10 @@ const AudioRecorder = () => {
     stopRecord,
     clearBlobUrl,
     getAudioStream,
-  } = useMediaRecorder({audio: true});
+  } = useMediaRecorder({
+    audio: true,
+    onStop: (url: string) => alert(`录音完成，${url}`)
+  });
 
   const previewAudio = useRef<HTMLAudioElement>(null);
 

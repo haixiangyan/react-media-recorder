@@ -4,6 +4,7 @@ interface Params {
   audio?: boolean;
   video?: boolean;
   screen?: boolean;
+  onStop?: (url: string, blobList: Blob[]) => void;
   askPermissionOnMount?: boolean;
 }
 
@@ -13,6 +14,7 @@ const useMediaRecorder = (params: Params) => {
     video = false,
     screen = false,
     askPermissionOnMount = false,
+    onStop = () => null,
   } = params;
 
   const [mediaUrl, setMediaUrl] = useState<string>('');
@@ -60,6 +62,7 @@ const useMediaRecorder = (params: Params) => {
       const blob = new Blob(mediaBlobs.current, blobProperty)
       const url = URL.createObjectURL(blob);
       setMediaUrl(url);
+      onStop(url, mediaBlobs.current);
     }
 
     mediaRecorder.current?.start();

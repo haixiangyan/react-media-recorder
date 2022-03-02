@@ -12,7 +12,11 @@ const ScreenRecorder = () => {
     clearBlobUrl,
     getMediaStream,
     toggleMute,
-  } = useMediaRecorder({ audio: true, screen: true });
+  } = useMediaRecorder({
+    audio: true,
+    screen: true,
+    onStop: (url: string) => alert(`录屏完成，${url}`)
+  });
 
   const previewVideo = useRef<HTMLVideoElement>(null)
 
