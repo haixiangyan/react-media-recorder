@@ -9,7 +9,7 @@ const App = () => {
     pauseRecord,
     stopRecord,
     clearBlobUrl,
-  } = useMediaRecorder();
+  } = useMediaRecorder({});
 
   return (
     <div>
