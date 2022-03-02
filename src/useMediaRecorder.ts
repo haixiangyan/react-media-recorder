@@ -52,7 +52,12 @@ const useMediaRecorder = (params: Params) => {
       mediaBlobs.current.push(blobEvent.data);
     }
     mediaRecorder.current.onstop = () => {
-      const blob = new Blob(mediaBlobs.current, { type: 'audio/wav' })
+      const [chunk] = mediaBlobs.current;
+      const blobProperty: BlobPropertyBag = Object.assign(
+        { type: chunk.type },
+        video ? { type: 'video/mp4' } : { type: 'audio/wav' }
+      );
+      const blob = new Blob(mediaBlobs.current, blobProperty)
       const url = URL.createObjectURL(blob);
       setMediaUrl(url);
     }
