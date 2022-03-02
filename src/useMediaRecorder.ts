@@ -16,6 +16,7 @@ const useMediaRecorder = (params: Params) => {
   } = params;
 
   const [mediaUrl, setMediaUrl] = useState<string>('');
+  const [isMuted, setIsMuted] = useState<boolean>(false);
 
   const mediaStream = useRef<MediaStream>();
   const audioStream = useRef<MediaStream>();
@@ -37,11 +38,11 @@ const useMediaRecorder = (params: Params) => {
     }
   }, [screen, video, audio])
 
-  useEffect(() => {
-    if (askPermissionOnMount) {
-      getMediaStream().then();
-    }
-  }, [audio, screen, video, getMediaStream, askPermissionOnMount])
+  const toggleMute = (isMute: boolean) => {
+    mediaStream.current?.getAudioTracks().forEach(track => track.enabled = !isMute);
+    audioStream.current?.getAudioTracks().forEach(track => track.enabled = !isMute)
+    setIsMuted(isMute);
+  }
 
   const startRecord = async () => {
     await getMediaStream();
@@ -73,6 +74,12 @@ const useMediaRecorder = (params: Params) => {
     mediaBlobs.current = [];
   }
 
+  useEffect(() => {
+    if (askPermissionOnMount) {
+      getMediaStream().then();
+    }
+  }, [audio, screen, video, getMediaStream, askPermissionOnMount])
+
   return {
     mediaUrl,
     startRecord,
@@ -81,6 +88,8 @@ const useMediaRecorder = (params: Params) => {
     stopRecord,
     getMediaStream: () => mediaStream.current,
     getAudioStream: () => audioStream.current,
+    toggleMute,
+    isMuted,
     clearBlobUrl: () => {
       if (mediaUrl) {
         URL.revokeObjectURL(mediaUrl);

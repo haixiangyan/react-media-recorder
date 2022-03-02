@@ -4,12 +4,14 @@ import useMediaRecorder from "./useMediaRecorder";
 const ScreenRecorder = () => {
   const {
     mediaUrl,
+    isMuted,
     startRecord,
     resumeRecord,
     pauseRecord,
     stopRecord,
     clearBlobUrl,
     getMediaStream,
+    toggleMute,
   } = useMediaRecorder({ audio: true, screen: true });
 
   const previewVideo = useRef<HTMLVideoElement>(null)
@@ -29,6 +31,7 @@ const ScreenRecorder = () => {
       <button onClick={pauseRecord}>暂停</button>
       <button onClick={resumeRecord}>恢复</button>
       <button onClick={stopRecord}>停止</button>
+      <button onClick={() => toggleMute(!isMuted)}>{isMuted ? '打开声音' : '禁音'}</button>
       <button onClick={clearBlobUrl}>清除 URL</button>
     </div>
   )
