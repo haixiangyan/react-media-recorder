@@ -79,8 +79,8 @@ const useMediaRecorder = (params: Params) => {
     pauseRecord,
     resumeRecord,
     stopRecord,
-    getMediaStream: () => mediaStream.current ? new MediaStream(mediaStream.current?.getVideoTracks()) : null,
-    getAudioStream: () => audioStream.current ? new MediaStream(audioStream.current?.getAudioTracks()) : null,
+    getMediaStream: () => mediaStream.current,
+    getAudioStream: () => audioStream.current,
     clearBlobUrl: () => {
       if (mediaUrl) {
         URL.revokeObjectURL(mediaUrl);

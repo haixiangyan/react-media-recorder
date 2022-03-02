@@ -21,7 +21,7 @@ const AudioRecorder = () => {
 
       <audio ref={previewAudio} controls/>
 
-      <button onClick={() => previewAudio.current!.srcObject = getAudioStream()}>
+      <button onClick={() => previewAudio.current!.srcObject = getAudioStream() || null}>
         预览
       </button>
       <button onClick={startRecord}>开始</button>

@@ -21,7 +21,7 @@ const CameraRecorder = () => {
 
       <video ref={previewVideo} controls />
 
-      <button onClick={() => previewVideo.current!.srcObject = getMediaStream()}>
+      <button onClick={() => previewVideo.current!.srcObject = getMediaStream() || null}>
         预览
       </button>
       <button onClick={startRecord}>开始</button>

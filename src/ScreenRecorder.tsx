@@ -21,7 +21,7 @@ const ScreenRecorder = () => {
 
       <video ref={previewVideo} controls />
 
-      <button onClick={() => previewVideo.current!.srcObject = getMediaStream()}>
+      <button onClick={() => previewVideo.current!.srcObject = getMediaStream() || null}>
         预览
       </button>
 
