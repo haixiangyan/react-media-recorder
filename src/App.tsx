@@ -1,27 +1,18 @@
 import React from 'react';
-import useMediaRecorder from "./useMediaRecorder";
+import AudioRecorder from "./AudioRecorder";
+import CameraRecorder from "./CameraRecorder";
+import ScreenRecorder from "./ScreenRecorder";
 
 const App = () => {
-  const {
-    mediaUrl,
-    startRecord,
-    resumeRecord,
-    pauseRecord,
-    stopRecord,
-    clearBlobUrl,
-  } = useMediaRecorder({});
-
   return (
     <div>
-      <h1>react 录音</h1>
+      <h1>Recorder</h1>
 
-      <audio src={mediaUrl} controls />
+      <AudioRecorder />
 
-      <button onClick={startRecord}>开始</button>
-      <button onClick={pauseRecord}>暂停</button>
-      <button onClick={resumeRecord}>恢复</button>
-      <button onClick={stopRecord}>停止</button>
-      <button onClick={clearBlobUrl}>清除 URL</button>
+      <CameraRecorder />
+
+      <ScreenRecorder />
     </div>
   );
 }

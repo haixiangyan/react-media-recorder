@@ -44,9 +44,7 @@ const useMediaRecorder = (params: Params) => {
   }, [audio, screen, video, getMediaStream, askPermissionOnMount])
 
   const startRecord = async () => {
-    if (!mediaStream.current) {
-      await getMediaStream();
-    }
+    await getMediaStream();
 
     mediaRecorder.current = new MediaRecorder(mediaStream.current!);
     mediaRecorder.current.ondataavailable = (blobEvent) => {
