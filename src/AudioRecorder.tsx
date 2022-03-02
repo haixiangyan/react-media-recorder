@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import useMediaRecorder from "./useMediaRecorder";
 
 const AudioRecorder = () => {
@@ -9,13 +9,21 @@ const AudioRecorder = () => {
     pauseRecord,
     stopRecord,
     clearBlobUrl,
-  } = useMediaRecorder({ audio: true });
+    getAudioStream,
+  } = useMediaRecorder({audio: true});
+
+  const previewAudio = useRef<HTMLAudioElement>(null);
 
   return (
     <div>
       <h2>录音</h2>
-      <audio src={mediaUrl} controls />
+      <audio src={mediaUrl} controls/>
 
+      <audio ref={previewAudio} controls/>
+
+      <button onClick={() => previewAudio.current!.srcObject = getAudioStream()}>
+        预览
+      </button>
       <button onClick={startRecord}>开始</button>
       <button onClick={pauseRecord}>暂停</button>
       <button onClick={resumeRecord}>恢复</button>
